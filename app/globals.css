@@ -1,0 +1,274 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --color-forest-950: #0B1512;
+  --color-forest-900: #10211C;
+  --color-forest-800: #172B25;
+  --color-forest-700: #203D32;
+  --color-forest-600: #2C5244;
+  --color-forest-300: #8DAAA0;
+  --color-forest-200: #B2CCC3;
+  --color-forest-100: #D8EAE3;
+  --color-gold-200: #F7EED4;
+  --color-gold-300: #EED7A1;
+  --color-gold-400: #DFBF85;
+  --color-gold-500: #C6A36A;
+  --color-gold-600: #A88448;
+  --color-gold-700: #886834;
+  --color-ivory: #F8F7F2;
+  --color-charcoal: #252A27;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Bulletproof Color Utility Fallbacks */
+.bg-forest-950 { background-color: #0B1512 !important; }
+.bg-forest-900 { background-color: #10211C !important; }
+.bg-forest-800 { background-color: #172B25 !important; }
+.bg-forest-700 { background-color: #203D32 !important; }
+.bg-forest-600 { background-color: #2C5244 !important; }
+
+.bg-forest-900\/40 { background-color: rgba(16, 33, 28, 0.4) !important; }
+.bg-forest-900\/50 { background-color: rgba(16, 33, 28, 0.5) !important; }
+.bg-forest-900\/60 { background-color: rgba(16, 33, 28, 0.6) !important; }
+.bg-forest-900\/70 { background-color: rgba(16, 33, 28, 0.7) !important; }
+.bg-forest-900\/80 { background-color: rgba(16, 33, 28, 0.8) !important; }
+.bg-forest-900\/90 { background-color: rgba(16, 33, 28, 0.9) !important; }
+
+.bg-forest-800\/60 { background-color: rgba(23, 43, 37, 0.6) !important; }
+.bg-forest-800\/80 { background-color: rgba(23, 43, 37, 0.8) !important; }
+.bg-forest-950\/80 { background-color: rgba(11, 21, 18, 0.8) !important; }
+.bg-forest-950\/85 { background-color: rgba(11, 21, 18, 0.85) !important; }
+.bg-forest-950\/90 { background-color: rgba(11, 21, 18, 0.9) !important; }
+.bg-forest-950\/95 { background-color: rgba(11, 21, 18, 0.95) !important; }
+
+.text-forest-100 { color: #D8EAE3 !important; }
+.text-forest-200 { color: #B2CCC3 !important; }
+.text-forest-300 { color: #8DAAA0 !important; }
+.text-forest-400 { color: #5F8276 !important; }
+
+.text-gold-200 { color: #F7EED4 !important; }
+.text-gold-300 { color: #EED7A1 !important; }
+.text-gold-400 { color: #DFBF85 !important; }
+.text-gold-500 { color: #C6A36A !important; }
+.text-gold-600 { color: #A88448 !important; }
+
+.bg-gold-400 { background-color: #DFBF85 !important; }
+.bg-gold-500 { background-color: #C6A36A !important; }
+.bg-gold-600 { background-color: #A88448 !important; }
+.bg-gold-500\/20 { background-color: rgba(198, 163, 106, 0.2) !important; }
+.bg-gold-500\/30 { background-color: rgba(198, 163, 106, 0.3) !important; }
+
+.border-gold-400 { border-color: #DFBF85 !important; }
+.border-gold-500 { border-color: #C6A36A !important; }
+.border-gold-500\/10 { border-color: rgba(198, 163, 106, 0.1) !important; }
+.border-gold-500\/15 { border-color: rgba(198, 163, 106, 0.15) !important; }
+.border-gold-500\/20 { border-color: rgba(198, 163, 106, 0.2) !important; }
+.border-gold-500\/25 { border-color: rgba(198, 163, 106, 0.25) !important; }
+.border-gold-500\/30 { border-color: rgba(198, 163, 106, 0.3) !important; }
+.border-gold-500\/40 { border-color: rgba(198, 163, 106, 0.4) !important; }
+.border-gold-500\/50 { border-color: rgba(198, 163, 106, 0.5) !important; }
+.border-gold-500\/60 { border-color: rgba(198, 163, 106, 0.6) !important; }
+
+.font-serif { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; }
+
+:root {
+  --background: #172B25;
+  --foreground: #F8F7F2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #172B25;
+  color: #F8F7F2;
+}
+
+body {
+  background-color: #172B25;
+  color: #F8F7F2;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #10211C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2C5244;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A36A;
+}
+
+/* Selection */
+::selection {
+  background: #C6A36A;
+  color: #10211C;
+}
+
+/* Luxury Glass Effects */
+.glass-panel {
+  background: rgba(23, 43, 37, 0.78) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(198, 163, 106, 0.25) !important;
+}
+
+.glass-panel-light {
+  background: rgba(248, 247, 242, 0.94) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(198, 163, 106, 0.3) !important;
+  color: #172B25 !important;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F7EED4 0%, #DFBF85 45%, #C6A36A 75%, #A88448 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 25px rgba(198, 163, 106, 0.15);
+  border: 1px solid rgba(198, 163, 106, 0.35);
+}
+
+.gold-btn {
+  background: linear-gradient(135deg, #DFBF85 0%, #C6A36A 100%) !important;
+  color: #10211C !important;
+  font-weight: 700 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-btn:hover {
+  background: linear-gradient(135deg, #F7EED4 0%, #DFBF85 100%) !important;
+  box-shadow: 0 8px 24px rgba(198, 163, 106, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Leaflet map custom overrides for luxury dark palette */
+.leaflet-container {
+  font-family: inherit;
+  background-color: #10211C !important;
+  border-radius: 1rem;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #172B25 !important;
+  color: #F8F7F2 !important;
+  border: 1px solid #C6A36A !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: #172B25 !important;
+}
+
+/* =========================================================
+   AVELORA BESPOKE LUXURY ANIMATIONS (Sparkles, Dust, Flight)
+   ========================================================= */
+
+@keyframes twinkleStar {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.75);
+    filter: drop-shadow(0 0 2px rgba(198, 163, 106, 0.4));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(12deg);
+    filter: drop-shadow(0 0 10px rgba(223, 191, 133, 0.95));
+  }
+}
+
+.animate-twinkle {
+  animation: twinkleStar 4s ease-in-out infinite;
+}
+
+@keyframes floatDust {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-24px) translateX(12px);
+    opacity: 0.9;
+  }
+}
+
+.animate-float-dust {
+  animation: floatDust 5s ease-in-out infinite;
+}
+
+@keyframes airplaneGlide {
+  0% {
+    transform: translate3d(-15vw, 15vh, 0) scale(0.85);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.95;
+  }
+  85% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(115vw, 2vh, 0) scale(1.05);
+    opacity: 0;
+  }
+}
+
+.avelora-sky-flight {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 15;
+  animation: airplaneGlide 22s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* Subtle Shimmer for High-End Cards & Badges */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.gold-shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(223, 191, 133, 0.18), transparent);
+  animation: shimmerSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
